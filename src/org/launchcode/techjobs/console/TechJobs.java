@@ -3,10 +3,13 @@ package org.launchcode.techjobs.console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Map;
+
 
 /**
  * Created by LaunchCode
  */
+@SuppressWarnings("MagicConstant")
 public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
@@ -61,7 +64,8 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    //   System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -111,6 +115,19 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        //    System.out.println("printJobs is not implemented yet");
+        if (someJobs.size() > 0) {
+            for (HashMap<String, String> outer : someJobs) {
+                System.out.println("************");
+                for (Map.Entry<String, String> inner : outer.entrySet()) {
+                    System.out.println(inner.getKey() + ": " + inner.getValue());
+                }
+                System.out.println("************");
+                System.out.println();
+            }
+        }
+        else {
+            System.out.println("No results found.");
+        }
     }
 }
